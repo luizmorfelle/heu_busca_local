@@ -43,7 +43,7 @@ def main(versaoDoArquivo):
     print(to_export)
     df = pd.DataFrame(to_export, columns=['iteracoes', 'maquinas', 'nTarefas', 'r', '%Perturbacao', 'Makespan','tempo'])
     print(df)
-    df.to_csv('Busca_Iterada' + versaoDoArquivo + '.csv', encoding='utf-8', index=False)
+    df.to_csv('Busca_Iterada' + str(versaoDoArquivo) + '.csv', encoding='utf-8', index=False)
 def move_random_tasks(maquinas, per):
     maquina_to_remove = get_next_machine(maquinas)
     tarefas_sorteadas = random.sample(maquina_to_remove, int(len(maquina_to_remove) * per))
