@@ -1,3 +1,4 @@
+import busca_iterada
 import primeira_melhora
 
 

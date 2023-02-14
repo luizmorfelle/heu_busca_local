@@ -1,7 +1,7 @@
 import random
 import time
 from functools import reduce
-
+import pandas as pd
 # m = número de máquinas {10, 20, 50}
 # n = qtde tarefas = m^r
 # i = tempo de cada tarefa entre 1 e 100
@@ -26,16 +26,24 @@ def main():
                 count += 1
             end = time.time()
             print_machines(maquinas)
+            
+            maquinaComMaiorMakespan = get_next_machine(maquinas)
+            indiceMakespan = maquinas.index(maquinaComMaiorMakespan)
+
             to_export.append({
-                "mov": count,
-                "m": m,
-                "n": qtde_tarefas,
+                "iteracoes": count,
+                "maquinas": m,
+                "nTarefas": qtde_tarefas,
                 "r": r,
-                "time": end - start
+                "%Perturbacao": "null",
+                "Makespan": get_makespan(maquinas,indiceMakespan),
+                "tempo": end - start
             })
 
     print(to_export)
-
+    df = pd.DataFrame(to_export, columns=['iteracoes', 'maquinas', 'nTarefas', 'r', '%Perturbacao', 'Makespan', 'tempo'])
+    print(df)
+    df.to_csv('Primeira_Melhora.csv', encoding='utf-8', index=False)
 
 def make_move(maquinas):
     maquina_to_remove = get_next_machine(maquinas)
@@ -50,7 +58,7 @@ def make_move(maquinas):
                 maquina_to_remove)) + tarefa_to_move:
             maquina_destino.append(tarefa_to_move)
             return True
-
+    maquina_to_remove.append(tarefa_to_move)
     return False
 
 
