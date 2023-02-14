@@ -4,7 +4,7 @@ from functools import reduce
 import pandas as pd
 to_export = []
 
-def main():
+def main(versaoDoArquivo):
     posibilidades_maquina = [10, 20, 50]
     possibilidades_r = [1.5, 2]
     intensidades_perturbacao = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
@@ -43,7 +43,7 @@ def main():
     print(to_export)
     df = pd.DataFrame(to_export, columns=['iteracoes', 'maquinas', 'nTarefas', 'r', '%Perturbacao', 'Makespan','tempo'])
     print(df)
-    df.to_csv('Busca_Iterada.csv', encoding='utf-8', index=False)
+    df.to_csv('Busca_Iterada' + versaoDoArquivo + '.csv', encoding='utf-8', index=False)
 def move_random_tasks(maquinas, per):
     maquina_to_remove = get_next_machine(maquinas)
     tarefas_sorteadas = random.sample(maquina_to_remove, int(len(maquina_to_remove) * per))

@@ -10,7 +10,7 @@ import pandas as pd
 to_export = []
 
 
-def main():
+def main(versaoDoArquivo):
     posibilidades_maquina = [10, 20, 50]
     possibilidades_r = [1.5, 2]
 
@@ -43,7 +43,7 @@ def main():
     print(to_export)
     df = pd.DataFrame(to_export, columns=['iteracoes', 'maquinas', 'nTarefas', 'r', '%Perturbacao', 'Makespan', 'tempo'])
     print(df)
-    df.to_csv('Primeira_Melhora.csv', encoding='utf-8', index=False)
+    df.to_csv('Primeira_Melhora' + versaoDoArquivo + '.csv', encoding='utf-8', index=False)
 
 def make_move(maquinas):
     maquina_to_remove = get_next_machine(maquinas)
